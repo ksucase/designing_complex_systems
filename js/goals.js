@@ -28,7 +28,7 @@ else {	var isCollapsed = false;}
  function loadRadial(){
  	var radius = input / 2;  
    
-	// create an svg canvas area
+	// create svg canvas area
 	var canvas = d3.select("#canvas").append("svg")
 		.attr("width", input)
 		.attr("height", input)

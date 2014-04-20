@@ -1,8 +1,28 @@
-body, canvas {
+body {
     padding: 15px;
     border: solid 1px #ccc;
-    font: 10px sans-serif;
+    font: 10px;
+    font-family: "Helvetica Neue", Helvetica;
+   
+   
 }
+#canvas {
+	 padding: 15px;
+  
+    padding-bottom: 15px;
+    
+ }
+.hint {
+   margin: 15px;
+    font: 8px;
+    font-family: "Helvetica Neue", Helvetica;
+}
+
+#header, #footer {
+  position: absolute;
+  top: 0;
+}
+
 
 btn-group {
     padding: 15px;
