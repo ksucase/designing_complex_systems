@@ -194,7 +194,7 @@
 				  var nodes = tree.nodes(root).reverse();
 
 				  // Normalize node coordinates for fixed-depth.
-				  nodes.forEach(function(d) { d.y = d.depth * 180; });
+				  nodes.forEach(function(d) { d.y = d.depth * 120; });
 
 				  // Update the nodes.
 				  var node = canvas.selectAll("g.node")
