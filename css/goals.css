@@ -6,10 +6,8 @@ body, canvas {
 
 btn-group {
     padding: 15px;
-   
 }
 
-            
 .node circle {
 	cursor: pointer;
 	fill: #fff;
@@ -24,7 +22,6 @@ btn-group {
 .node text {
 	font-size: 11px;
 }
-
 
 .link {
 	fill: none;
