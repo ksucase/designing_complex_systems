@@ -7,9 +7,9 @@
           content="width=device-width, initial-scale=1.0, maximum-scale=1,user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="description" content="Goal Consistency RPE, Kansas State University">
+    <meta name="description" content="Shorebird Microbiota Project, Kansas State University">
     <meta name="author" content="Denise Case">
-    <title>Designing Complex Cooperative Systems</title>
+    <title>Interactive Trees</title>
     <link rel="icon" type="image/png" href="favicon.png"/>
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="css/goals.css"/>
@@ -37,7 +37,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Designing Complex Cooperative Systems</a>
+        <a class="navbar-brand" href="index.html">Interactive Trees</a>
     </div>
     <!--/.navbar-header -->
     <div class="navbar-collapse collapse">
@@ -56,25 +56,22 @@
                     <i class="fa fa-globe" style="color: white"></i>&nbsp;&nbsp;Project <b
                         class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="http://ipds.cis.ksu.edu/" data-toggle="collapse"
+                    <li><a href="..\sites.html" data-toggle="collapse"
                            data-target=".navbar-collapse.in">
-                        <i class="fa fa-globe"></i>&nbsp;&nbsp;IPDS Website</a></li>
+                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Shorebird Microbiota Project</a></li>
+                <li><a href="http://bioinformatics.k-state.edu/" data-toggle="collapse"
+                           data-target=".navbar-collapse.in">
+                        <i class="fa fa-globe"></i>&nbsp;&nbsp;K-State Bioinformatics</a></li>
+                    <li><a href="https://www.ksu.edu/biology/" data-toggle="collapse"
+                           data-target=".navbar-collapse.in">
+                        <i class="fa fa-globe"></i>&nbsp;&nbsp;K-State Division of Biology</a></li>
+                         <li><a href="http://cis.ksu.edu/" data-toggle="collapse"
+                           data-target=".navbar-collapse.in">
+                        <i class="fa fa-globe"></i>&nbsp;&nbsp;K-State Computing and Information Sciences</a></li>
+                    
                 </ul>
             </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" id="downloadDrop" href="#" role="button"
-                   data-toggle="dropdown">
-                    <i class="fa fa-bar-chart-o" style="color: white"></i>&nbsp;&nbsp;Diagrams <b
-                        class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
-                           onclick="toggle1();">
-                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Voltages</a></li>
-                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
-                           onclick="toggle2();">
-                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Simulation</a></li>
-                </ul>
-            </li>
+           
             <li class="dropdown">
                 <a id="rDrop" href="#" role="button" class="dropdown-toggle"
                    data-toggle="dropdown"><i class="fa fa-globe" style="color: white">
@@ -93,20 +90,33 @@
     <!--/.navbar-collapse -->
 </div>
 <!--/.navbar -->
-<p><br>
 
+
+<div id="container">
+<p><br>
+ <div id="body">
+ <div id="header">
 <div class="btn-group" data-toggle="buttons" id="radioDisplay">
     <label class="btn btn-danger"> <input type="radio" name="options" id="1">Radial </label>
     <label class="btn btn-primary"> <input type="radio" name="options" id="2">Flat </label>
     <label class="btn btn-success active"> <input type="radio" name="options" id="3">Collapsible
     </label>
-</div>
- <div class="hint">Click nodes to expand/contract. Refresh page to display all.</div>
-<div id="canvas">
-</div>
- <div id="footer">
-
+	</div>
+        <div class="hint">Click nodes to expand/contract. Refresh page to display all.
     </div>
+</div>   <!-- end header -->
+                    
+<div id="canvas" >
+</div>   <!-- end canvas -->
+
+ <div id="footer">
+    <hr>
+    <p>(c) 2014 <a href="http://people.cis.ksu.edu/~dmcase/">Denise Case</a></p>
+ </div> </div>   <!-- end footer -->
+                    
+ </div>  <!-- end body -->
+
+</div>  <!-- end container -->
 <script type="text/javascript">
 
     var disp;
@@ -129,8 +139,10 @@
 			    .projection(function(d) { return [d.y, d.x]; });
 
 			canvas = d3.select("#canvas").append("svg")
-			    .attr("width", w + m[1] + m[3])
-			    .attr("height", h + m[0] + m[2])
+			  //  .attr("width", w + m[1] + m[3])
+			  //  .attr("height", h + m[0] + m[2])
+			    .attr("width", viewerWidth)
+                .attr("height", viewerHeight)
 			     .style("overflow", "scroll")
 			  .append("g")
 			    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
@@ -142,48 +154,21 @@
 		    // Initialize the display to show a few nodes.
             root.children.forEach(toggleAll);
             toggle(root.children[0]);
-            toggle(root.children[0].children[8]);
-            toggle(root.children[0].children[8].children[0]);
-            toggle(root.children[0].children[8].children[0].children[0]);
-            toggle(root.children[0].children[8].children[0].children[0].children[0]);
-            toggle(root.children[0].children[8].children[0].children[0].children[1]);
-            toggle(root.children[0].children[8].children[0].children[1]);
-            toggle(root.children[0].children[8].children[0].children[1].children[0]);
-            toggle(root.children[0].children[8].children[0].children[1].children[1]);
-            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0]);
-            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0]);
-            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[0]);
-            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[0].children[1]);
-            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[1]);
-			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[1].children[0]);
-			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[1].children[1]);
-            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[2]);
-			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[2].children[0]);
-			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[2].children[1]);
-            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[3]);
-			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[3].children[0]);
-			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[3].children[1]);
-            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[4]);
-			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[4].children[0]);
-			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[4].children[1]);
-            toggle(root.children[0].children[8].children[0].children[2]);
-            toggle(root.children[0].children[8].children[0].children[2].children[0]);
-            toggle(root.children[0].children[8].children[0].children[2].children[1]);
-            toggle(root.children[0].children[8].children[0].children[3]);
-            toggle(root.children[0].children[8].children[0].children[3].children[1]);
-            toggle(root.children[0].children[8].children[0].children[3].children[1].children[0]);
-            toggle(root.children[0].children[8].children[0].children[3].children[1].children[1]);
-            toggle(root.children[0].children[8].children[0].children[3].children[2]);
-            toggle(root.children[0].children[8].children[0].children[3].children[2].children[0]);
-            toggle(root.children[0].children[8].children[0].children[3].children[2].children[1]);            
-            toggle(root.children[0].children[8].children[0].children[4]);
-            toggle(root.children[0].children[8].children[0].children[4].children[1]);
-            toggle(root.children[0].children[8].children[0].children[4].children[1].children[0]);
-            toggle(root.children[0].children[8].children[0].children[4].children[1].children[1]);
-            toggle(root.children[0].children[8].children[0].children[4].children[2]);
-            toggle(root.children[0].children[8].children[0].children[4].children[2].children[0]);
-            toggle(root.children[0].children[8].children[0].children[4].children[2].children[1]);
+            toggle(root.children[0].children[0]);
+            toggle(root.children[0].children[1]);
+            toggle(root.children[0].children[2]);
+            toggle(root.children[0].children[3]);
+                        
+            toggle(root.children[0].children[0].children[0]);
+            toggle(root.children[0].children[1].children[0]);
+            toggle(root.children[0].children[2].children[0]);
+            toggle(root.children[0].children[3].children[0]);
+            
+            toggle(root.children[0].children[0].children[0].children[0]);
+            toggle(root.children[0].children[0].children[0].children[0].children[0]);
+            toggle(root.children[0].children[0].children[0].children[0].children[1]);
+            toggle(root.children[0].children[0].children[0].children[1]);
+        
             update(root);
 
 			 function update(source) {
@@ -351,15 +336,11 @@
                             D3</a></li>
 
                         <li><a href="https://github.com/ksucase/bird_microbiota" target="_blank">GitHub
-                            designing_complex_systems repository</a></li>
+                            bird_microbiota repository</a></li>
                     </ul>
                     <p>
                 </div>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Data Visualization
-                    </div>
-                    <p>
-                    <p>
+               
                 </div>
             </div>
         </div>    <!-- /.modal-content -->

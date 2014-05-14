@@ -1,31 +1,46 @@
+/* see http://bl.ocks.org/robschmuecker/7880033 */
+
+html {
+
+}
+
 body {
-    padding: 15px;
+    padding: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
     border: solid 1px #ccc;
     font: 10px;
     font-family: "Helvetica Neue", Helvetica;
-   
-   
+ 
+ 
 }
+#header, #footer {
+
+  height: 10%;
+}
+
+
 #canvas {
-	 padding: 15px;
-  
-    padding-bottom: 15px;
-    
- }
+
+	padding: 5px;
+	padding-bottom: 5px;
+
+
+	margin: 15px;
+
+}
+
 .hint {
    margin: 15px;
     font: 8px;
     font-family: "Helvetica Neue", Helvetica;
 }
 
-#header, #footer {
-  position: absolute;
-  top: 0;
-}
 
 
 btn-group {
     padding: 15px;
+}
+.node {
+	font: 10px sans-serif;
 }
 
 .node circle {
@@ -35,16 +50,61 @@ btn-group {
 	stroke-width: 1.5px;
 }
 
-.node {
-	font: 10px sans-serif;
-}
 
 .node text {
-	font-size: 11px;
+	font-size:11px;
+        font-family:sans-serif;
 }
+
+.overlay{
+      background-color:#EEE;
+  }
 
 .link {
 	fill: none;
 	stroke: #ccc;
 	stroke-width: 1.5px;
 }
+.templink {
+    fill: none;
+    stroke: red;
+    stroke-width: 3px;
+  }
+
+.ghostCircle.show{
+	display:block;
+}
+
+.ghostCircle, .activeDrag .ghostCircle{
+	 display: none;
+}
+
+/* See http://joelvasallo.com/taxcalc.html */
+
+            input {
+                height: 30px !important;
+            }
+            tr {
+                border: solid black 1px;
+            }
+            td {
+                padding: 0 20px !important;
+                text-align: right !important;
+            }
+            label {
+                padding: 10px 0 0;
+            }
+            th {
+                background-color: grey;
+                padding: 0 20px !important;
+                text-align: right !important;
+            }
+            legend h2 {
+                padding-top: 30px;
+            }
+           
+          
+
+            .clear {
+                clear: both;
+            }

@@ -1,7 +1,18 @@
 // code for goals.html
+// See http://bl.ocks.org/robschmuecker/7880033.
 
 var input = 800;
 var root;
+
+// advanced drawing
+var totalNodes = 0;
+var maxLabelLength = 0;
+var selectedNode = null;
+var draggingNode = null;
+var panSpeed = 200;
+var panBoundary = 20; // Within 20px from edges will pan when dragging.
+var viewerWidth = $(document).width();
+var viewerHeight = $(document).height();
 
 $(document).ready(function () {
     $(".btn-group").click(function () {
@@ -39,7 +50,7 @@ else {	var isCollapsed = false;}
 	cluster = d3.layout.cluster()
 		.size([360, radius - 120]);
 
-	// create path
+	// define a d3 diagonal projection for use by the node paths later
 	var diagonal = d3.svg.diagonal.radial()
 		.projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
 
@@ -146,3 +157,108 @@ function toggle(d) {
 	}
 }
 
+// functions from http://bl.ocks.org/robschmuecker/7880033
+
+function pan(domNode, direction) {
+	var speed = panSpeed;
+	if (panTimer) {
+		clearTimeout(panTimer);
+		translateCoords = d3.transform(svgGroup.attr("transform"));
+		if (direction == 'left' || direction == 'right') {
+			translateX = direction == 'left' ? translateCoords.translate[0] + speed : translateCoords.translate[0] - speed;
+			translateY = translateCoords.translate[1];
+		} else if (direction == 'up' || direction == 'down') {
+			translateX = translateCoords.translate[0];
+			translateY = direction == 'up' ? translateCoords.translate[1] + speed : translateCoords.translate[1] - speed;
+		}
+		scaleX = translateCoords.scale[0];
+		scaleY = translateCoords.scale[1];
+		scale = zoomListener.scale();
+		svgGroup.transition().attr("transform", "translate(" + translateX + "," + translateY + ")scale(" + scale + ")");
+		d3.select(domNode).select('g.node').attr("transform", "translate(" + translateX + "," + translateY + ")");
+		zoomListener.scale(zoomListener.scale());
+		zoomListener.translate([translateX, translateY]);
+		panTimer = setTimeout(function() {
+			pan(domNode, speed, direction);
+		}, 50);
+	}
+}
+
+ // Define the zoom function for the zoomable tree
+
+function zoom() {
+	svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}
+
+// A recursive helper function for performing some setup by walking through all nodes
+
+function visit(parent, visitFn, childrenFn) {
+	if (!parent) return;
+	visitFn(parent);
+	var children = childrenFn(parent);
+	if (children) {
+		var count = children.length;
+		for (var i = 0; i < count; i++) {
+			visit(children[i], visitFn, childrenFn);
+		}
+	}
+}
+ // Helper functions for collapsing and expanding nodes.
+
+function collapse(d) {
+	if (d.children) {
+		d._children = d.children;
+		d._children.forEach(collapse);
+		d.children = null;
+	}
+}
+
+function expand(d) {
+	if (d._children) {
+		d.children = d._children;
+		d.children.forEach(expand);
+		d._children = null;
+	}
+}
+// Function to update the temporary connector indicating dragging affiliation
+    var updateTempConnector = function() {
+        var data = [];
+        if (draggingNode !== null && selectedNode !== null) {
+            // have to flip the source coordinates since we did this for the existing connectors on the original tree
+            data = [{
+                source: {
+                    x: selectedNode.y0,
+                    y: selectedNode.x0
+                },
+                target: {
+                    x: draggingNode.y0,
+                    y: draggingNode.x0
+                }
+            }];
+        }
+        var link = svgGroup.selectAll(".templink").data(data);
+
+        link.enter().append("path")
+            .attr("class", "templink")
+            .attr("d", d3.svg.diagonal())
+            .attr('pointer-events', 'none');
+
+        link.attr("d", d3.svg.diagonal());
+
+        link.exit().remove();
+    };
+
+// Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of children.
+
+    function centerNode(source) {
+        scale = zoomListener.scale();
+        x = -source.y0;
+        y = -source.x0;
+        x = x * scale + viewerWidth / 2;
+        y = y * scale + viewerHeight / 2;
+        d3.select('g').transition()
+            .duration(duration)
+            .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+        zoomListener.scale(scale);
+        zoomListener.translate([x, y]);
+    }
