@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1,user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="Goal Consistency RPE, Kansas State University">
+    <meta name="author" content="Denise Case">
+    <title>Designing Complex Cooperative Systems</title>
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/goals.css"/>
+    <link rel="stylesheet" href="css/nv.d3.css"/>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+<script src="lib/d3/d3.min.js"></script>
+<script src="lib/js/jquery-1.11.0.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="js/nv.d3.js"></script>
+<script src="js/cluster_data.js"></script>
+<script src="js/goals.js"></script>
+
+
+<!-- Navigation -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Designing Complex Cooperative Systems</a>
+    </div>
+    <!--/.navbar-header -->
+    <div class="navbar-collapse collapse">
+        <form class="navbar-form navbar-right" role="search">
+            <div class="form-group has-feedback navbar-right">
+                <input id="searchbox" type="text" placeholder="Search" class="form-control">
+                <span id="searchicon" class="fa fa-search form-control-feedback"></span>
+            </div>
+        </form>
+        <ul class="nav navbar-nav">
+
+
+            <li class="dropdown">
+                <a id="pDrop" href="#" role="button" class="dropdown-toggle"
+                   data-toggle="dropdown">
+                    <i class="fa fa-globe" style="color: white"></i>&nbsp;&nbsp;Project <b
+                        class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="http://ipds.cis.ksu.edu/" data-toggle="collapse"
+                           data-target=".navbar-collapse.in">
+                        <i class="fa fa-globe"></i>&nbsp;&nbsp;IPDS Website</a></li>
+                         <li><a href="index.html" data-toggle="collapse"
+                           data-target=".navbar-collapse.in">
+                        <i class="fa fa-globe"></i>&nbsp;&nbsp;System Architecture</a></li>
+                      <li><a href="control.html" data-toggle="collapse"
+                             data-target=".navbar-collapse.in">
+                          <i class="fa fa-globe"></i>&nbsp;&nbsp;Illustration</a></li>
+                      <li><a href="inverters.html" data-toggle="collapse"
+                             data-target=".navbar-collapse.in">
+                          <i class="fa fa-globe"></i>&nbsp;&nbsp;Smart Inverter Calculations</a></li>
+                      <li><a href="flow.html" data-toggle="collapse"
+                             data-target=".navbar-collapse.in">
+                          <i class="fa fa-globe"></i>&nbsp;&nbsp;Communication Flow</a></li>
+                  </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" id="downloadDrop" href="#" role="button"
+                   data-toggle="dropdown">
+                    <i class="fa fa-bar-chart-o" style="color: white"></i>&nbsp;&nbsp;Diagrams <b
+                        class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
+                           onclick="toggle1();">
+                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Voltages</a></li>
+                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
+                           onclick="toggle2();">
+                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Simulation</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a id="rDrop" href="#" role="button" class="dropdown-toggle"
+                   data-toggle="dropdown"><i class="fa fa-globe" style="color: white">
+                </i>&nbsp;&nbsp;About <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <!--	<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
+                               onclick="$('#aboutModal').modal('show'); return false;">
+                            <i class="fa fa-question-circle"></i>&nbsp;&nbsp;About</a></li> -->
+                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
+                           onclick="$('#resourcesModal').modal('show'); return false;">
+                        <i class="fa fa-external-link"></i>&nbsp;&nbsp;Resources</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!--/.navbar-collapse -->
+</div>
+<!--/.navbar -->
+<p><br>
+ <div id="header">header
+ </div>
+   <div class="container">
+
+			<div class="hero-unit">
+                <h1>Smart Inverter Calculator</h1>
+               	<p>Use the defaults or overwrite as needed.</p>
+            </div>
+
+
+
+ <!-- See http://joelvasallo.com/taxcalc.html -->
+ 
+  <div class="row-fluid">
+  				<div class="span12">
+
+			 	<legend><h2>Enter Change in Real Power (P):</h2></legend>
+					  <div class="clear"></div>
+  					<h3>Local (this agent):</h3>
+					<div class="input-append">
+                        <input class="span3" id="input1" type="text" placeholder="Local">
+                        <span class="add-on">kW</span>
+					</div> 
+        	   		
+        	   		  <div class="clear"></div>
+  					<h3>Community Request:</h3>
+					<div class="input-append">
+                       <input class="span3" id="input2" type="text" placeholder="Community">
+                        <span class="add-on">kW</span>
+                    </div>
+        	    
+            
+                    <legend><h2>New Smart Inverter Setting (Q):</h2></legend>
+
+                    <div class="clear"></div>
+  					<h3>New Setting:</h3>
+                	<div class="input-append">
+						<input class="span4" id="agi" readonly>
+						<span class="add-on">kW</span>
+					</div>
+  				  	<h3>Additional Possible (if needed):</h3>
+                	<div class="input-append">
+						<input class="span4" id="deduction" readonly>
+						<span class="add-on">kW</span>
+					</div>
+  				  
+  				  
+  				</div> <!-- end span12 -->
+	
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<div id="canvas">
+canvas
+</div>
+ <div id="footer">
+        	    <hr>
+                    <p>(c) 2014 <a href="http://people.cis.ksu.edu/~dmcase/">Denise Case</a></p>
+                    </div>
+ </div>  <!-- /container -->
+
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Designing for Goal Consisency</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Design
+                    </div>
+                    <p><br>
+                    <ul>
+                        <li>....
+                        </li>
+                        <li>....
+                        </li>
+                    </ul>
+                    <p><br>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Implementation
+                    </div>
+                    <p><br>
+
+                    <p><br>
+                </div>
+
+            </div>
+            <!-- /modal body -->
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal fade" id="resourcesModal" tabindex="1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Resources and External Links</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Research
+                    </div>
+                    <p>
+                    <ul>
+
+                        <li><a href="http://cis.ksu.edu" target="_blank">Kansas State Computing &
+                            Information Sciences Department</a></li>
+                    </ul>
+                    <p>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Data Visualization
+                    </div>
+                    <p>
+                    <ul>
+                        <li><a href="http://d3js.org/" target=" _blank">Data-Driven Documents</a>
+                        </li>
+                        <li><a href="http://nvd3.org/" target=" _blank">NVD3: Re-usable charts for
+                            D3</a></li>
+
+                        <li><a href="https://github.com/ksucase/bird_microbiota" target="_blank">GitHub
+                            designing_complex_systems repository</a></li>
+                    </ul>
+                    <p>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Data Visualization
+                    </div>
+                    <p>
+                    <p>
+                </div>
+            </div>
+        </div>    <!-- /.modal-content -->
+    </div>  <!-- /.modal-dialog -->
+</div>  <!-- /.modal -->
+
+
+   <script>
+        	
+            function calc() {
+            	var setting = 0.00;
+            	var margin = 0.0;
+            	var local = parseFloat(jQuery('#input1').toFixed(2));
+                var community = parseFloat(jQuery('#input2').val());
+             
+                 jQuery('#result1').val(parseFloat((tax/ti)*100).toFixed(2));
+   }
+            jQuery('#input1').change(calc);
+            jQuery('#input2').change(calc);
+           
+        </script>
+
+
+</body>
+</html>
+

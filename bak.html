@@ -24,8 +24,8 @@
 <script src="lib/js/jquery-1.11.0.min.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="js/nv.d3.js"></script>
-<script src="js/hdata.js"></script>
-<script src="js/showtrees.js"></script>
+<script src="js/cluster_data.js"></script>
+<script src="js/goals.js"></script>
 
 
 <!-- Navigation -->
@@ -59,7 +59,7 @@
                     <li><a href="http://ipds.cis.ksu.edu/" data-toggle="collapse"
                            data-target=".navbar-collapse.in">
                         <i class="fa fa-globe"></i>&nbsp;&nbsp;IPDS Website</a></li>
-                 <!--        <li><a href="index.html" data-toggle="collapse"
+                         <li><a href="index.html" data-toggle="collapse"
                            data-target=".navbar-collapse.in">
                         <i class="fa fa-globe"></i>&nbsp;&nbsp;System Architecture</a></li>
                     <li><a href="control.html" data-toggle="collapse"
@@ -70,7 +70,7 @@
                         <i class="fa fa-globe"></i>&nbsp;&nbsp;Smart Inverter Calculations</a></li>
                     <li><a href="flow.html" data-toggle="collapse"
                            data-target=".navbar-collapse.in">
-                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Communication Flow</a></li>  -->
+                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Communication Flow</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -108,19 +108,18 @@
 
 
 <div id="container">
-<div id="header">
-	<div class="btn-group" data-toggle="buttons" id="radioDisplay">
-	    <label class="btn btn-danger"> <input type="radio" name="options" id="1">Radial </label>
-	    <label class="btn btn-primary"> <input type="radio" name="options" id="2">Flat </label>
-	    <label class="btn btn-success active"> <input type="radio" name="options" id="3">Collapsible
-	    </label>
+<p><br>
+ <div id="body">
+ <div id="header">
+<div class="btn-group" data-toggle="buttons" id="radioDisplay">
+    <label class="btn btn-danger"> <input type="radio" name="options" id="1">Radial </label>
+    <label class="btn btn-primary"> <input type="radio" name="options" id="2">Flat </label>
+    <label class="btn btn-success active"> <input type="radio" name="options" id="3">Collapsible
+    </label>
 	</div>
         <div class="hint">Click nodes to expand/contract. Refresh page to display all.
     </div>
 </div>   <!-- end header -->
-<p><br>
- <div id="body">
- 
                     
 <div id="canvas" >
 </div>   <!-- end canvas -->
@@ -128,12 +127,11 @@
  <div id="footer">
     <hr>
     <p>(c) 2014 <a href="http://people.cis.ksu.edu/~dmcase/">Denise Case</a></p>
- </div>   <!-- end footer -->
+ </div> </div>   <!-- end footer -->
                     
  </div>  <!-- end body -->
 
 </div>  <!-- end container -->
-
 <script type="text/javascript">
 
     var disp;
@@ -144,9 +142,9 @@
 		    function loadCollapsible(){
 
 	        // flare function see 	view-source:http://mbostock.github.io/d3/talk/20111018/tree.html
-			var m = [20, 30, 20, 30];
-			var w = 680 - m[1] - m[3];
-			var h = 700 - m[0] - m[2];
+			var m = [20, 120, 20, 120];
+			var w = 880 - m[1] - m[3];
+			var h = 600 - m[0] - m[2];
 			var i = 0;
 
 			tree = d3.layout.tree()
@@ -164,65 +162,55 @@
 			  .append("g")
 			    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
-			//root = cluster_data;
-			root = hdata;
-			console.log(root);
-			
-			root.x0 = h / 8;
+			root = cluster_data;
+			root.x0 = h / 2;
 			root.y0 = 0;
 
-		      // Initialize the display to show a few nodes.
+		    // Initialize the display to show a few nodes.
             root.children.forEach(toggleAll);
-         
             toggle(root.children[0]);
-            toggle(root.children[0].children[0]);
-            toggle(root.children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0].children[1].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[1].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[1].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[1]);
-            toggle(root.children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[1].children[0]);
-            toggle(root.children[0].children[0].children[1].children[0].children[0]);
-            toggle(root.children[0].children[0].children[1].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[1].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[1].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[1].children[0].children[1]);
-            toggle(root.children[0].children[0].children[1].children[1]);
-          
+            toggle(root.children[0].children[8]);
+            toggle(root.children[0].children[8].children[0]);
+            toggle(root.children[0].children[8].children[0].children[0]);
+            toggle(root.children[0].children[8].children[0].children[0].children[0]);
+            toggle(root.children[0].children[8].children[0].children[0].children[1]);
+            toggle(root.children[0].children[8].children[0].children[1]);
+            toggle(root.children[0].children[8].children[0].children[1].children[0]);
+            toggle(root.children[0].children[8].children[0].children[1].children[1]);
+            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0]);
+            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0]);
+            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[0]);
+            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[0].children[0]);
+            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[0].children[1]);
+            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[1]);
+			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[1].children[0]);
+			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[1].children[1]);
+            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[2]);
+			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[2].children[0]);
+			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[2].children[1]);
+            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[3]);
+			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[3].children[0]);
+			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[3].children[1]);
+            toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[4]);
+			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[4].children[0]);
+			toggle(root.children[0].children[8].children[0].children[1].children[1].children[0].children[0].children[4].children[1]);
+            toggle(root.children[0].children[8].children[0].children[2]);
+            toggle(root.children[0].children[8].children[0].children[2].children[0]);
+            toggle(root.children[0].children[8].children[0].children[2].children[1]);
+            toggle(root.children[0].children[8].children[0].children[3]);
+            toggle(root.children[0].children[8].children[0].children[3].children[1]);
+            toggle(root.children[0].children[8].children[0].children[3].children[1].children[0]);
+            toggle(root.children[0].children[8].children[0].children[3].children[1].children[1]);
+            toggle(root.children[0].children[8].children[0].children[3].children[2]);
+            toggle(root.children[0].children[8].children[0].children[3].children[2].children[0]);
+            toggle(root.children[0].children[8].children[0].children[3].children[2].children[1]);            
+            toggle(root.children[0].children[8].children[0].children[4]);
+            toggle(root.children[0].children[8].children[0].children[4].children[1]);
+            toggle(root.children[0].children[8].children[0].children[4].children[1].children[0]);
+            toggle(root.children[0].children[8].children[0].children[4].children[1].children[1]);
+            toggle(root.children[0].children[8].children[0].children[4].children[2]);
+            toggle(root.children[0].children[8].children[0].children[4].children[2].children[0]);
+            toggle(root.children[0].children[8].children[0].children[4].children[2].children[1]);
             update(root);
 
 			 function update(source) {
@@ -233,7 +221,7 @@
 				  var nodes = tree.nodes(root).reverse();
 
 				  // Normalize node coordinates for fixed-depth.
-				  nodes.forEach(function(d) { d.y = d.depth * 80; });
+				  nodes.forEach(function(d) { d.y = d.depth * 120; });
 
 				  // Update the nodes.
 				  var node = canvas.selectAll("g.node")
@@ -394,7 +382,12 @@
                     </ul>
                     <p>
                 </div>
-               
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Data Visualization
+                    </div>
+                    <p>
+                    <p>
+                </div>
             </div>
         </div>    <!-- /.modal-content -->
     </div>  <!-- /.modal-dialog -->

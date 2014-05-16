@@ -1,21 +1,12 @@
-html, body {
-  
-  overflow: hidden;
-}
-body {
-  padding-top: 50px;
-}
 input[type="radio"], input[type="checkbox"] {
   margin: 0;
 }
 #loading {
-  position: absolute;
   width: 220px;
   height: 19px;
   top: 50%;
   left: 50%;
   margin: -10px 0 0 -110px;
-  z-index: 20001;
 }
 
 .table {
@@ -23,7 +14,7 @@ input[type="radio"], input[type="checkbox"] {
 }
 .navbar .navbar-brand {
   font-weight: bold;
-  font-size: 25px;
+  font-size: 20px;
   color: white;
 }
 .navbar-collapse.in {
