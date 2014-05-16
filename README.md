@@ -1,7 +1,7 @@
-﻿Designing Complex Cooperative Systems
+Designing Complex Cooperative Systems
 =========
 
-Visualizing Goal Consistency 
+Multigroup agents
 Kansas State University 
               
 Started:  April 2014
