@@ -3,367 +3,329 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1,user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="description" content="Designing Complex Cooperative Systems, Kansas State University">
     <meta name="author" content="Denise Case">
-    <title>Designing Complex Cooperative Systems</title>
+    <title>Designing Complex Systems</title>
+    
+    <!-- custom icons-->
     <link rel="icon" type="image/png" href="favicon.png"/>
     <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="css/goals.css"/>
-    <link rel="stylesheet" href="css/nv.d3.css"/>
+    
+    <!-- custom styles-->
     <link rel="stylesheet" href="css/main.css">
+    
+     <!-- nvd3 styles -->
+    <link rel="stylesheet" href="lib/nvd3/nv.d3.css"/>
+    
+    <!-- bootstrap and font awesome responsive pages -->
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
 </head>
 
 <body>
-<script src="lib/d3/d3.min.js"></script>
-<script src="lib/js/jquery-1.11.0.min.js"></script>
-<script src="lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="js/nv.d3.js"></script>
-<script src="js/hdata.js"></script>
-<script src="js/showtrees.js"></script>
+	<!-- bootstrap for responsive pages -->
+	<script src="lib/jquery/jquery-1.11.0.min.js"></script>
+	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	
+	<!-- d3 and nvd3 for visualization -->
+	<script src="lib/d3/d3.min.js"></script>
+	<script src="lib/nvd3/nv.d3.js"></script>
+	
+	<!-- custom -->
+	<script src="js/topology.js"></script>
+	<script src="js/holarchy.js"></script>
+	<script src="js/showtrees.js"></script>
+	<script src="js/showsome.js"></script>
+	
 
 
-<!-- Navigation -->
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse"
-                data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html">Designing Complex Cooperative Systems</a>
-    </div>
-    <!--/.navbar-header -->
-    <div class="navbar-collapse collapse">
-        <form class="navbar-form navbar-right" role="search">
-            <div class="form-group has-feedback navbar-right">
-                <input id="searchbox" type="text" placeholder="Search" class="form-control">
-                <span id="searchicon" class="fa fa-search form-control-feedback"></span>
-            </div>
-        </form>
-        <ul class="nav navbar-nav">
+	<!-- Fixed navbar (bootstrap) -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		    <div class="navbar-header">
+		        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		        </button>
+		        <a class="navbar-brand" href="index.html">Designing Complex Systems</a>
+		    </div>
+		    <!--/.navbar-header -->
+		    <div class="collapse navbar-collapse">
+		    <!--
+		        <form class="navbar-form navbar-right" role="search">
+		            <div class="form-group has-feedback navbar-right">
+		                <input id="searchbox" type="text" placeholder="Search" class="form-control">
+		                <span id="searchicon" class="fa fa-search form-control-feedback"></span>
+		            </div>
+		        </form>
+		        -->
+		        <ul class="nav navbar-nav "> <!-- nav list -->
+		            <li class="dropdown">
+		                <a id="pDrop" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+		                    <i class="fa fa-globe" style="color: white"></i>&nbsp;&nbsp;Project <b
+		                        class="caret"></b></a>
+		                <ul class="dropdown-menu">
+		                    <li><a href="http://ipds.cis.ksu.edu/" data-toggle="collapse"
+		                           data-target=".navbar-collapse.in">
+		                        <i class="fa fa-globe"></i>&nbsp;&nbsp;IPDS Website</a></li>
+		                 <!--        <li><a href="index.html" data-toggle="collapse"
+		                           data-target=".navbar-collapse.in">
+		                        <i class="fa fa-globe"></i>&nbsp;&nbsp;System Architecture</a></li>
+		                    <li><a href="control.html" data-toggle="collapse"
+		                           data-target=".navbar-collapse.in">
+		                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Illustration</a></li>
+		                        <li><a href="inverters.html" data-toggle="collapse"
+		                           data-target=".navbar-collapse.in">
+		                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Smart Inverter Calculations</a></li>
+		                    <li><a href="flow.html" data-toggle="collapse"
+		                           data-target=".navbar-collapse.in">
+		                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Communication Flow</a></li>  -->
+		                </ul>
+		            </li>
+		            <li class="dropdown">
+		                <a class="dropdown-toggle" id="downloadDrop" href="#" role="button"
+		                   data-toggle="dropdown">
+		                    <i class="fa fa-bar-chart-o" style="color: white"></i>&nbsp;&nbsp;Diagrams <b
+		                        class="caret"></b></a>
+		                <ul class="dropdown-menu">
+		                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
+		                           onclick="toggle1();">
+		                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Voltages</a></li>
+		                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
+		                           onclick="toggle2();">
+		                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Simulation</a></li>
+		                </ul>
+		            </li>
+		            <li class="dropdown">
+		                <a id="rDrop" href="#" role="button" class="dropdown-toggle"
+		                   data-toggle="dropdown"><i class="fa fa-globe" style="color: white">
+		                </i>&nbsp;&nbsp;About <b class="caret"></b></a>
+		                <ul class="dropdown-menu">
+		                    <!--	<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
+		                               onclick="$('#aboutModal').modal('show'); return false;">
+		                            <i class="fa fa-question-circle"></i>&nbsp;&nbsp;About</a></li> -->
+		                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
+		                           onclick="$('#resourcesModal').modal('show'); return false;">
+		                        <i class="fa fa-external-link"></i>&nbsp;&nbsp;Resources</a></li>
+		                </ul>
+		            </li>
+		        </ul>  <!-- nav list -->
+	        </div>  <!--/.navbar-collapse -->
+	</nav> <!--/.navbar -->
 
+	<div class="container-fluid">  <!-- begin page content container as full-width container-->
+	  <div class="row">
 
-            <li class="dropdown">
-                <a id="pDrop" href="#" role="button" class="dropdown-toggle"
-                   data-toggle="dropdown">
-                    <i class="fa fa-globe" style="color: white"></i>&nbsp;&nbsp;Project <b
-                        class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="http://ipds.cis.ksu.edu/" data-toggle="collapse"
-                           data-target=".navbar-collapse.in">
-                        <i class="fa fa-globe"></i>&nbsp;&nbsp;IPDS Website</a></li>
-                 <!--        <li><a href="index.html" data-toggle="collapse"
-                           data-target=".navbar-collapse.in">
-                        <i class="fa fa-globe"></i>&nbsp;&nbsp;System Architecture</a></li>
-                    <li><a href="control.html" data-toggle="collapse"
-                           data-target=".navbar-collapse.in">
-                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Illustration</a></li>
-                        <li><a href="inverters.html" data-toggle="collapse"
-                           data-target=".navbar-collapse.in">
-                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Smart Inverter Calculations</a></li>
-                    <li><a href="flow.html" data-toggle="collapse"
-                           data-target=".navbar-collapse.in">
-                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Communication Flow</a></li>  -->
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" id="downloadDrop" href="#" role="button"
-                   data-toggle="dropdown">
-                    <i class="fa fa-bar-chart-o" style="color: white"></i>&nbsp;&nbsp;Diagrams <b
-                        class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
-                           onclick="toggle1();">
-                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Voltages</a></li>
-                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
-                           onclick="toggle2();">
-                        <i class="fa fa-globe"></i>&nbsp;&nbsp;Simulation</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a id="rDrop" href="#" role="button" class="dropdown-toggle"
-                   data-toggle="dropdown"><i class="fa fa-globe" style="color: white">
-                </i>&nbsp;&nbsp;About <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <!--	<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
-                               onclick="$('#aboutModal').modal('show'); return false;">
-                            <i class="fa fa-question-circle"></i>&nbsp;&nbsp;About</a></li> -->
-                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"
-                           onclick="$('#resourcesModal').modal('show'); return false;">
-                        <i class="fa fa-external-link"></i>&nbsp;&nbsp;Resources</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <!--/.navbar-collapse -->
-</div>
-<!--/.navbar -->
+		<div id="header">
+			<div class="btn-group" data-toggle="buttons" id="radioDisplay">
+			    <label class="btn btn-danger "> <input type="radio" name="options" id="1">Radial </label>
+			    <label class="btn btn-primary"> <input type="radio" name="options" id="2">Flat </label>
+			    <label class="btn btn-warning"> <input type="radio" name="options" id="3">Holonic </label>
+			    <label class="btn btn-success active"> <input type="radio" name="options" id="4">Collapsible
+			    </label>
+			</div>
+		        <div class="hint">Click nodes to expand/contract. Refresh page to display all.
+		    </div>
+		</div>   <!-- end header -->
+		<p><br>
+	
+		<div class="outer">
+			<div class="inner">        
+				<div id="canvas" >
+				</div>   <!-- end canvas -->
+			</div>   <!-- end inner -->
+		</div>   <!-- end outer -->
+				 <div id="footer">
+		    <div class="container">
+		    (c) 2014 <a href="http://people.cis.ksu.edu/~dmcase/">Denise Case</a>
+		    </div>
+		 </div>   <!-- end footer -->
+				 </div>  <!-- end row -->
+	</div>  <!-- end page content container -->
+	
 
+	<script type="text/javascript">
+	
+			var disp;
+	       
+	   
+	        if (typeof disp === 'undefined') {
+	            loadRadial()
+	        }
+			if (disp === 4) {
+			    function loadCollapsible(){
+	
+		        // flare function see 	view-source:http://mbostock.github.io/d3/talk/20111018/tree.html
+		        var topMargin = 5;
+		        var bottomMargin = 5;
+		        var leftMargin = 10;
+		        var rightMargin = 10;
+				var m = [topMargin, leftMargin, bottomMargin, rightMargin];
+				var w = 1200 - m[1] - m[3];
+				var h = 3000 - m[0] - m[2];
+				var i = 0;
+	
+				tree = d3.layout.tree()
+					.size([h, w]);
+	
+				diagonal = d3.svg.diagonal()
+				    .projection(function(d) { return [d.y, d.x]; });
+	
+				canvas = d3.select("#canvas").append("svg")
+				    .attr("width", w)
+	                .attr("height", h)
+				    .style("overflow", "scroll")
+				  .append("g")
+				    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+	
+				root = topology;
+				root.x0 = h / 8;
+				root.y0 = 0;
+				
+				//showSome(root);
+ 	            update(root);
+	
+				 function update(source) {
+					  var duration = d3.event && d3.event.altKey ? 5000 : 500;
+	
+					  // Compute a new tree layout.
+					  // Calculates node coordinates relative to their container.
+					  var nodes = tree.nodes(root).reverse();
+	
+					  // Normalize node coordinates for fixed-depth.
+					  var levelLength = 60;
+					  nodes.forEach(function(d) { d.y = d.depth * levelLength; });
+	
+					  // Update the nodes.
+					  var node = canvas.selectAll("g.node")
+					      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+					      
+					  	// append text to each node
+						node.append("text")
+							.attr("dx", function(d) { return d.children ? -8 : 8; })
+							.attr("dy", ".31em")
+	                        .style("color", "black")
+	                         .style("fill-opacity", 1)
+							.style("text-anchor", function(d) { return d.children ? "end" : "start"; })
+							.text(function(d) { return d.name; });
+	
+					  // Enter any new nodes at the parent's previous position.
+					  var nodeEnter = node.enter().append("svg:g")
+					      .attr("class", "node")
+					      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+					      .on("click", function(d) { toggle(d); update(d); });
+	
+					  nodeEnter.append("svg:circle")
+					      .attr("r", 1e-6)
+					      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+	
+					  nodeEnter.append("svg:text")
+					      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+					      .attr("dy", ".35em")
+					      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+	                      .style("display", "inline")
+	                      .style("color", "black")
+					      .text(function(d) { return d.name; })
+					      .style("fill-opacity", 1e-6);
+	
+					  // Transition nodes to their new position.
+					  var nodeUpdate = node.transition()
+					      .duration(duration)
+					      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+	
+					  nodeUpdate.select("circle")
+					      .attr("r", 4)
+					      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+	
+					  nodeUpdate.select("text")
+					      .style("fill-opacity", 1)
+					      .style("color", "black")
+					      .style("display", "inline");
+	
+					  // Transition exiting nodes to the parent's new position.
+					  var nodeExit = node.exit().transition()
+					      .duration(duration)
+					      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+					      .remove();
+	
+					  nodeExit.select("circle")
+					      .attr("r", 1e-6);
+	
+					  nodeExit.select("text")
+						  .style("color", "black")
+					      .style("fill-opacity", 1e-6);
+	
+					  // Update the links.
+					  var link = canvas.selectAll("path.link")
+					      .data(tree.links(nodes), function(d) { return d.target.id; });
+	
+					  // Enter any new links at the parent's previous position.
+					  link.enter().insert("svg:path", "g")
+					      .attr("class", "link")
+					      .attr("d", function(d) {
+					        var o = {x: source.x0, y: source.y0};
+					        return diagonal({source: o, target: o});
+					      })
+					    .transition()
+					      .duration(duration)
+					      .attr("d", diagonal);
+	
+					  // Transition links to their new position.
+					  link.transition()
+					      .duration(duration)
+					      .attr("d", diagonal);
+	
+					  // Transition exiting nodes to the parent's new position.
+					  link.exit().transition()
+					      .duration(duration)
+					      .attr("d", function(d) {
+					        var o = {x: source.x, y: source.y};
+					        return diagonal({source: o, target: o});
+					      })
+					      .remove();
+	
+	                  // Stash the old positions for transition.
+	                  nodes.forEach(function(d) {
+	                    d.x0 = d.x;
+	                    d.y0 = d.y;
+	                  });
+	             }
+	        }
+		}
 
-<div id="container">
-<div id="header">
-	<div class="btn-group" data-toggle="buttons" id="radioDisplay">
-	    <label class="btn btn-danger"> <input type="radio" name="options" id="1">Radial </label>
-	    <label class="btn btn-primary"> <input type="radio" name="options" id="2">Flat </label>
-	    <label class="btn btn-success active"> <input type="radio" name="options" id="3">Collapsible
-	    </label>
-	</div>
-        <div class="hint">Click nodes to expand/contract. Refresh page to display all.
-    </div>
-</div>   <!-- end header -->
-<p><br>
- <div id="body">
- 
-                    
-<div id="canvas" >
-</div>   <!-- end canvas -->
+	</script>
 
- <div id="footer">
-    <hr>
-    <p>(c) 2014 <a href="http://people.cis.ksu.edu/~dmcase/">Denise Case</a></p>
- </div>   <!-- end footer -->
-                    
- </div>  <!-- end body -->
-
-</div>  <!-- end container -->
-
-<script type="text/javascript">
-
-    var disp;
-        if (typeof disp === 'undefined') {
-            loadRadial()
-        }
-		if (disp === 3) {
-		    function loadCollapsible(){
-
-	        // flare function see 	view-source:http://mbostock.github.io/d3/talk/20111018/tree.html
-			var m = [20, 30, 20, 30];
-			var w = 680 - m[1] - m[3];
-			var h = 700 - m[0] - m[2];
-			var i = 0;
-
-			tree = d3.layout.tree()
-				.size([h, w]);
-
-			diagonal = d3.svg.diagonal()
-			    .projection(function(d) { return [d.y, d.x]; });
-
-			canvas = d3.select("#canvas").append("svg")
-			  //  .attr("width", w + m[1] + m[3])
-			  //  .attr("height", h + m[0] + m[2])
-			    .attr("width", viewerWidth)
-                .attr("height", viewerHeight)
-			     .style("overflow", "scroll")
-			  .append("g")
-			    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
-
-			//root = cluster_data;
-			root = hdata;
-			console.log(root);
-			
-			root.x0 = h / 8;
-			root.y0 = 0;
-
-		      // Initialize the display to show a few nodes.
-            root.children.forEach(toggleAll);
-         
-            toggle(root.children[0]);
-            toggle(root.children[0].children[0]);
-            toggle(root.children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[0].children[1].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[0].children[1].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[1].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[0].children[1].children[2].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[0].children[1]);
-            toggle(root.children[0].children[0].children[0].children[2].children[1].children[1]);
-            toggle(root.children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[1].children[0]);
-            toggle(root.children[0].children[0].children[1].children[0].children[0]);
-            toggle(root.children[0].children[0].children[1].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[1].children[0].children[0].children[0].children[0]);
-            toggle(root.children[0].children[0].children[1].children[0].children[0].children[1]);
-            toggle(root.children[0].children[0].children[1].children[0].children[1]);
-            toggle(root.children[0].children[0].children[1].children[1]);
-          
-            update(root);
-
-			 function update(source) {
-				  var duration = d3.event && d3.event.altKey ? 5000 : 500;
-
-				  // Compute a new tree layout.
-				  // Calculates node coordinates relative to their container.
-				  var nodes = tree.nodes(root).reverse();
-
-				  // Normalize node coordinates for fixed-depth.
-				  nodes.forEach(function(d) { d.y = d.depth * 80; });
-
-				  // Update the nodes.
-				  var node = canvas.selectAll("g.node")
-				      .data(nodes, function(d) { return d.id || (d.id = ++i); });
-
-				  // Enter any new nodes at the parent's previous position.
-				  var nodeEnter = node.enter().append("svg:g")
-				      .attr("class", "node")
-				      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-				      .on("click", function(d) { toggle(d); update(d); });
-
-				  nodeEnter.append("svg:circle")
-				      .attr("r", 1e-6)
-				      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
-
-				  nodeEnter.append("svg:text")
-				      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
-				      .attr("dy", ".35em")
-				      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-				      .text(function(d) { return d.name; })
-				      .style("fill-opacity", 1e-6);
-
-				  // Transition nodes to their new position.
-				  var nodeUpdate = node.transition()
-				      .duration(duration)
-				      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
-
-				  nodeUpdate.select("circle")
-				      .attr("r", 4.5)
-				      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
-
-				  nodeUpdate.select("text")
-				      .style("fill-opacity", 1);
-
-				  // Transition exiting nodes to the parent's new position.
-				  var nodeExit = node.exit().transition()
-				      .duration(duration)
-				      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
-				      .remove();
-
-				  nodeExit.select("circle")
-				      .attr("r", 1e-6);
-
-				  nodeExit.select("text")
-				      .style("fill-opacity", 1e-6);
-
-				  // Update the links…
-				  var link = canvas.selectAll("path.link")
-				      .data(tree.links(nodes), function(d) { return d.target.id; });
-
-				  // Enter any new links at the parent's previous position.
-				  link.enter().insert("svg:path", "g")
-				      .attr("class", "link")
-				      .attr("d", function(d) {
-				        var o = {x: source.x0, y: source.y0};
-				        return diagonal({source: o, target: o});
-				      })
-				    .transition()
-				      .duration(duration)
-				      .attr("d", diagonal);
-
-				  // Transition links to their new position.
-				  link.transition()
-				      .duration(duration)
-				      .attr("d", diagonal);
-
-				  // Transition exiting nodes to the parent's new position.
-				  link.exit().transition()
-				      .duration(duration)
-				      .attr("d", function(d) {
-				        var o = {x: source.x, y: source.y};
-				        return diagonal({source: o, target: o});
-				      })
-				      .remove();
-
-                  // Stash the old positions for transition.
-                  nodes.forEach(function(d) {
-                    d.x0 = d.x;
-                    d.y0 = d.y;
-                  });
-             }
-        }
-	}
-
-</script>
-
-
-
-<div class="modal fade" id="resourcesModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close" type="button" data-dismiss="modal"
-                        aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Resources and External Links</h4>
-            </div>
-            <div class="modal-body">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Research
-                    </div>
-                    <p>
-                    <ul>
-
-                        <li><a href="http://cis.ksu.edu" target="_blank">Kansas State Computing &
-                            Information Sciences Department</a></li>
-                    </ul>
-                    <p>
-                </div>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Data Visualization
-                    </div>
-                    <p>
-                    <ul>
-                        <li><a href="http://d3js.org/" target=" _blank">Data-Driven Documents</a>
-                        </li>
-                        <li><a href="http://nvd3.org/" target=" _blank">NVD3: Re-usable charts for
-                            D3</a></li>
-
-                        <li><a href="https://github.com/ksucase/designing_complex_systems" target="_blank">GitHub
-                            designing_complex_systems repository</a></li>
-                    </ul>
-                    <p>
-                </div>
-               
-            </div>
-        </div>    <!-- /.modal-content -->
-    </div>  <!-- /.modal-dialog -->
-</div>  <!-- /.modal -->
-
-
-</body>
+	<div class="modal fade" id="resourcesModal" tabindex="-1" role="dialog">
+	    <div class="modal-dialog modal-lg">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title">Resources and External Links</h4>
+	            </div>
+	            <div class="modal-body">
+	                <div class="panel panel-primary">
+	                    <div class="panel-heading">Research
+	                    </div> <p>
+	                    <ul>
+	                        <li><a href="http://cis.ksu.edu" target="_blank">Kansas State Computing & Information Sciences Department</a></li>
+	                    </ul><p>
+	                </div>
+	                <div class="panel panel-primary">
+	                    <div class="panel-heading">Data Visualization
+	                    </div>  <p>
+	                    <ul>
+	                        <li><a href="http://d3js.org/" target=" _blank">Data-Driven Documents</a></li>
+	                        <li><a href="http://nvd3.org/" target=" _blank">NVD3: Re-usable charts for D3</a></li>
+	                        <li><a href="https://github.com/ksucase/designing_complex_systems" target="_blank">GitHub designing_complex_systems repository</a></li>
+	                    </ul><p>
+	                </div>
+	            </div>
+	        </div>    <!-- /.modal-content -->
+	    </div>  <!-- /.modal-dialog -->
+	</div>  <!-- /.modal -->
+	</body>
 </html>
 
